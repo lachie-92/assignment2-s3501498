@@ -1,0 +1,17 @@
+{
+    "name": "lachl/musicapp",
+    "autoload": {
+        "psr-4": {
+            "Lachl\\Musicapp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "lachie-92",
+            "email": "s3501498@student.rmit.edu.au"
+        }
+    ],
+    "require": {
+        "aws/aws-sdk-php": "^3.0"
+    }
+}
