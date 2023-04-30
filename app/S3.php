@@ -20,8 +20,8 @@ class S3
                 'region' => 'ap-southeast-2',
                 'version' => 'latest',
                 'credentials' => [
-                    'key' => 'AKIAY7MZXWYZ5P4FBOBB',
-                    'secret' => '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',
+                    'key' => $_ENV['AWS_ACCESS_KEY_ID'],
+                    'secret' => $_ENV['AWS_SECRET_ACCESS_KEY'],
                 ],
             ]);
         }
