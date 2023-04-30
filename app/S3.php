@@ -16,12 +16,14 @@ class S3
     public static function client()
     {
         if (!self::$client) {
+            // Load the AWS credentials from the JSON file
+            $awsCredentials = json_decode(file_get_contents(__DIR__ . '/../aws.json'), true);
             self::$client = new S3Client([
                 'region' => 'ap-southeast-2',
                 'version' => 'latest',
                 'credentials' => [
-                    'key' => $_ENV['AWS_ACCESS_KEY_ID'],
-                    'secret' => $_ENV['AWS_SECRET_ACCESS_KEY'],
+                    'key' => $awsCredentials['access_key'],
+                    'secret' => $awsCredentials['secret_key'],
                 ],
             ]);
         }
