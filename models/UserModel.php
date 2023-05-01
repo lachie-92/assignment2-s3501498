@@ -15,7 +15,7 @@ class UserModel
         $this->dynamodb = Database::client();
     }
 
-    public function createUser($email, $password)
+    public function createUser($email, $password, $username)
     {
         $params = [
             'TableName' => $this->tableName,
@@ -25,16 +25,42 @@ class UserModel
                 ],
                 'password' => [
                     'S' => $password
+                ],
+                'user_name' => [
+                    'S' => $username
                 ]
             ]
         ];
 
         try {
             $result = $this->dynamodb->putItem($params);
-            echo "User created successfully!\n";
         } catch (DynamoDbException $e) {
             echo "Unable to create user:\n";
             echo $e->getMessage() . "\n";
+        }
+    }
+
+    public function checkEmail($email)
+    {
+        $params = [
+            'TableName' => $this->tableName,
+            'FilterExpression' => 'email = :email',
+            'ExpressionAttributeValues' => [
+                ':email' => ['S' => $email]
+            ]
+        ];
+    
+        try {
+            $result = $this->dynamodb->scan($params);
+            if ($result['Count'] > 0) {
+                return $result['Items'][0];
+            } else {
+                return null;
+            }
+        } catch (DynamoDbException $e) {
+            echo "Unable to read user:\n";
+            echo $e->getMessage() . "\n";
+            return null;
         }
     }
 

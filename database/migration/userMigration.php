@@ -69,7 +69,6 @@ $client->waitUntil('TableExists', array('TableName' => $tableName));
 // Add 10 entities to the login table
 for ($i = 0; $i <= 9; $i++) {
     $item = [
-        'id' => ['S' => uniqid()],
         'email' => ['S' => 's3501498'.$i.'@student.rmit.edu.au'],
         'user_name' => ['S' => 'Lachlan Young'.$i],
         'password' => ['S' => $i.'01234']

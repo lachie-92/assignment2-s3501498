@@ -32,6 +32,9 @@
         <?php if (isset($error_message)): ?>
             <p style="color: red;"><?php echo $error_message; ?></p>
         <?php endif; ?>
+        <?php if (isset($success_message)): ?>
+            <p style="color: green;"><?php echo $success_message; ?></p>
+        <?php endif; ?>
         <p>Don't have an account yet? <a href="/register">Register now</a></p>
     </div>
 </body>

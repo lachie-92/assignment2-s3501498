@@ -44,20 +44,22 @@ class HomeController
             $subscribedMusic = $this->subscriptionModel->getUserSubscriptions($user['email']['S']);
 
             $musicRecords = array();
-            foreach ($subscribedMusic as $item) {
-                $musicId = $item['music_id']['S'];
-            
-                // Retrieve the music record for the subscribed item
-                $musicRecord = $this->musicModel->getMusicById($musicId);
-
-                $musicRecords[] = array(
-                    'title' => $musicRecord[0]['title']['S'],
-                    'artist' => $musicRecord[0]['artist']['S'],
-                    'year' => $musicRecord[0]['year']['N'],
-                    'id' => $musicRecord[0]['id']['S'],
-                    'img_url' => $musicRecord[0]['img_url']['S'],
-                );
-
+            if(!empty($subscribedMusic)) {
+                foreach ($subscribedMusic as $item) {
+                    $musicId = $item['music_id']['S'];
+                
+                    // Retrieve the music record for the subscribed item
+                    $musicRecord = $this->musicModel->getMusicById($musicId);
+    
+                    $musicRecords[] = array(
+                        'title' => $musicRecord[0]['title']['S'],
+                        'artist' => $musicRecord[0]['artist']['S'],
+                        'year' => $musicRecord[0]['year']['N'],
+                        'id' => $musicRecord[0]['id']['S'],
+                        'img_url' => $musicRecord[0]['img_url']['S'],
+                    );
+    
+                }
             }
 
             include('views/dashboard.php');

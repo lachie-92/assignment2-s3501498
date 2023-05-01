@@ -52,4 +52,34 @@ class UserController
             exit;
         }
     }
+
+    public function register()
+    {
+        if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['username'])) {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $username = $_POST['username'];
+
+            $checkEmail = $this->userModel->checkEmail($email);
+
+            if ($checkEmail !== null) {
+                $error_message = "The email already exists.";
+                // Pass $error_message to the login view
+                include('views/register.php');
+                exit;
+            } else {
+                $user = $this->userModel->createUser($email, $password, $username);
+
+                $success_message = "Account created. Please login.";
+                // Pass $error_message to the login view
+                include('views/login.php');
+                exit;
+            }
+        } else {
+            $error_message = "Invalid email or password.";
+            // Pass $error_message to the login view
+            include('views/login.php');
+            exit;
+        }
+    }
 }

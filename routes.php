@@ -18,7 +18,7 @@ $router->get('/home', 'HomeController@index');
 $router->get('/login', 'HomeController@login');
 $router->post('/login', 'UserController@login');
 $router->get('/register', 'HomeController@register');
-$router->post('/register', 'UserController@store');
+$router->post('/register', 'UserController@register');
 
 $router->get('/dashboard', 'HomeController@dashboard');
 

@@ -24,28 +24,32 @@
     </div>
     <div class="container">
         <h2>Subscribed Music</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Title</th>
-                    <th>Artist</th>
-                    <th>Year</th>
-                    <th>Unsubscribe</th>
-                </tr>
-            </thead>
-            <tbody id="subscribed-music">
-                <?php foreach ($musicRecords as $music) { ?>
+        <?php if (empty($musicRecords)) { ?>
+            <p>No music has been subscribed to yet! Subscribe to some below</p>
+        <?php } else { ?>
+            <table>
+                <thead>
                     <tr>
-                        <td><img src="<?php echo $music['img_url']; ?>" alt="<?php echo $music['artist']; ?>" width="50"></td>
-                        <td><?php echo $music['title']; ?></td>
-                        <td><?php echo $music['artist']; ?></td>
-                        <td><?php echo $music['year']; ?></td>
-                        <td><button class="unsubscribe-btn" onclick="location.href='/unsubscribe?id=<?php echo $music['id']; ?>'" data-id="<?php echo $music['id']; ?>">Remove</button></td>
+                        <th>Image</th>
+                        <th>Title</th>
+                        <th>Artist</th>
+                        <th>Year</th>
+                        <th>Unsubscribe</th>
                     </tr>
-                <?php } ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody id="subscribed-music">
+                    <?php foreach ($musicRecords as $music) { ?>
+                        <tr>
+                            <td><img src="<?php echo $music['img_url']; ?>" alt="<?php echo $music['artist']; ?>" width="50"></td>
+                            <td><?php echo $music['title']; ?></td>
+                            <td><?php echo $music['artist']; ?></td>
+                            <td><?php echo $music['year']; ?></td>
+                            <td><button class="unsubscribe-btn" onclick="location.href='/unsubscribe?id=<?php echo $music['id']; ?>'" data-id="<?php echo $music['id']; ?>">Remove</button></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        <?php } ?>
     </div>
     <div class="container">
         <h2>Query Music</h2>

@@ -18,7 +18,7 @@
     </div>
     <div class="form">
         <h2>Register for Streaming Service</h2>
-        <form>
+        <form method="POST" action="/register">
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
@@ -33,6 +33,9 @@
             </div>
             <button type="submit">Register</button>
         </form>
+        <?php if (isset($error_message)): ?>
+            <p style="color: red;"><?php echo $error_message; ?></p>
+        <?php endif; ?>
         <p>Already have an account? <a href="/login">Login now</a></p>
     </div>
 </body>
